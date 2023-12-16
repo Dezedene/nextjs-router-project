@@ -3,6 +3,7 @@ import classes from './event-list.module.css'
 
 const EventList = (props) => {
   const { items } = props;
+
   console.log('🤖💬 ~ EventList ~ items:', items);
   
   return (
