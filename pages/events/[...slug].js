@@ -4,6 +4,9 @@ import { getFilteredEvents } from "../../dummy-data";
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 
+import ErrorAlert from "../../components/ui/error-alert";
+import Button from "../../components/ui/button";
+
 const SlugFilteredEvents = () => {
   const router = useRouter();
 
@@ -28,25 +31,42 @@ const SlugFilteredEvents = () => {
     numMonth < 1 ||
     numMonth > 12
   ) {
-    return <p>Invalid filter, adjust your values</p>
+    return (
+      <>
+        <ErrorAlert>
+          <p>Invalid filter, adjust your values</p>
+        </ErrorAlert>
+        <div className="center">
+          <Button link="/events">Show all events</Button>
+        </div>
+      </>
+    );
   }
 
   const filteredEvents = getFilteredEvents({
-    year:numYear,
-    month: numMonth
-  })
+    year: numYear,
+    month: numMonth,
+  });
 
   if (!filteredEvents || filteredEvents.length === 0) {
-    return <p>No events found for the chosen filter</p>
+    return (
+      <>
+        <ErrorAlert>
+          <p>No events found for the chosen filter</p>
+        </ErrorAlert>
+        <div className="center">
+          <Button link="/events">Show all events</Button>
+        </div>
+      </>
+    );
   }
 
-  const date = new Date(numYear, numMonth -1)
-
+  const date = new Date(numYear, numMonth - 1);
 
   return (
     <>
-      <ResultsTitle date={date}/>
-      <EventList items={filteredEvents}/>
+      <ResultsTitle date={date} />
+      <EventList items={filteredEvents} />
     </>
   );
 };
