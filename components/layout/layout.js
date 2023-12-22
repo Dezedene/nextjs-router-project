@@ -1,14 +1,15 @@
 import MainHeader from './main-header'
 
-const layout = (props) => {
+const Layout = (props) => {
+  console.log('🤖💬 ~ layout ~ props:', props);
   return (
     <>
       <MainHeader />
       <main>
-        { props.children }
+        {props.children}
       </main>
     </>
   )
 }
 
-export default layout
+export default Layout
